@@ -23,7 +23,7 @@ steps:
   args: ['fetch', '--unshallow']
 - id: 'Making build shell scripts executable'
   name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args:
   - -c
   - |
@@ -32,7 +32,7 @@ steps:
 # [START Terraform]
 - id: 'selective deployment'
   name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args: 
   - -c
   - |
@@ -40,7 +40,7 @@ steps:
     . build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
 - id: 'setup'
   name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args:
   - -c
   - |
@@ -52,7 +52,7 @@ steps:
 # [START tf-apply]
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args:
   - -c
   - |

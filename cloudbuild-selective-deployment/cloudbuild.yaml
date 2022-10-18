@@ -36,8 +36,8 @@ steps:
   args: 
   - -c
   - |
-    echo "command: . build-files/delta-changes.sh $PROJECT_ID $_DELTA_TRIGGER_NAME $BUILD_ID $COMMIT_SHA $TRIGGER_NAME $_PREVIOUS_COMMIT_SHA"
-    . build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
+    echo "command: . terraform-selective/build-files/delta-changes.sh $PROJECT_ID $_DELTA_TRIGGER_NAME $BUILD_ID $COMMIT_SHA $TRIGGER_NAME $_PREVIOUS_COMMIT_SHA"
+    . terraform-selective/build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
 - id: 'setup'
   name: gcr.io/cloud-builders/gcloud
   entrypoint: 'sh'
@@ -57,11 +57,11 @@ steps:
   - -c
   - |
       if [ "$_RUN_ALL_PROJECTS" == "true" ]  ; then
-        echo "Running ./build-files/tf-wrapper.sh apply_all on all projects ..."
-        ./build-files/tf-wrapper.sh apply_all "${BRANCH_NAME}"
+        echo "Running ./terraform-selective/build-files/tf-wrapper.sh apply_all on all projects ..."
+        ./terraform-selective/build-files/tf-wrapper.sh apply_all "${BRANCH_NAME}"
       elif [ -s logs/user_resources_folder_diff.log ]; then
-        echo "Running ./build-files/tf-wrapper.sh apply_diff on changed projects ..."
-        ./build-files/tf-wrapper.sh apply_diff "${BRANCH_NAME}"
+        echo "Running ./terraform-selective/build-files/tf-wrapper.sh apply_diff on changed projects ..."
+        ./terraform-selective/build-files/tf-wrapper.sh apply_diff "${BRANCH_NAME}"
       else
         echo "No difference was found in project folders or modules."
       fi

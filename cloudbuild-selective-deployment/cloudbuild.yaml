@@ -15,7 +15,7 @@
 timeout: 1200s
 substitutions:
   _TF_SA_EMAIL: '330889758378@cloudbuild.gserviceaccount.com'
-  _PREVIOUS_COMMIT_SHA: '426ce404e2af3125d34a224dfadb05506e24dfd0'
+  _PREVIOUS_COMMIT_SHA: '738cd48fe08279035bb01bd0c4f3ea8ad7816ba5'
   _RUN_ALL_PROJECTS: 'false'
 steps:
 - id: 'unshallow'
@@ -28,7 +28,7 @@ steps:
   - -c
   - |
     echo "Making build shell scripts executable."
-    chmod -R 755 build-files/
+    chmod -R 755 cloudbuild-selective-deployment/build-files/
 # [START Terraform]
 - id: 'selective deployment'
   name: 'hashicorp/terraform:1.0.0'

@@ -20,7 +20,7 @@ substitutions:
 steps:
 - id: 'unshallow'
   name: gcr.io/cloud-builders/git
-  args: ['fetch', 'https://github.com/sujeet-98']
+  args: ['fetch', 'https://github.com/sujeet-98/terraform-selective.git']
 - id: 'Making build shell scripts executable'
   name: gcr.io/$PROJECT_ID/terraform:latest
   entrypoint: bash

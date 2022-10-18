@@ -15,7 +15,7 @@
 timeout: 1200s
 substitutions:
   _TF_SA_EMAIL: '330889758378@cloudbuild.gserviceaccount.com'
-  _PREVIOUS_COMMIT_SHA: '33133d3dfc9343b1995e867deef47a40d217ceed'
+  _PREVIOUS_COMMIT_SHA: '426ce404e2af3125d34a224dfadb05506e24dfd0'
   _RUN_ALL_PROJECTS: 'false'
 steps:
 - id: 'unshallow'
@@ -36,8 +36,8 @@ steps:
   args: 
   - -c
   - |
-    echo "command: . terraform-selective/build-files/delta-changes.sh $PROJECT_ID $_DELTA_TRIGGER_NAME $BUILD_ID $COMMIT_SHA $TRIGGER_NAME $_PREVIOUS_COMMIT_SHA"
-    . terraform-selective/build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
+    echo "command: . cloudbuild-selective-deployment/build-files/delta-changes.sh $PROJECT_ID $_DELTA_TRIGGER_NAME $BUILD_ID $COMMIT_SHA $TRIGGER_NAME $_PREVIOUS_COMMIT_SHA"
+    . cloudbuild-selective-deployment/build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
 - id: 'setup'
   name: gcr.io/cloud-builders/gcloud
   entrypoint: 'sh'
@@ -57,11 +57,11 @@ steps:
   - -c
   - |
       if [ "$_RUN_ALL_PROJECTS" == "true" ]  ; then
-        echo "Running ./terraform-selective/build-files/tf-wrapper.sh apply_all on all projects ..."
-        ./terraform-selective/build-files/tf-wrapper.sh apply_all "${BRANCH_NAME}"
+        echo "Running ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_all on all projects ..."
+        ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_all "${BRANCH_NAME}"
       elif [ -s logs/user_resources_folder_diff.log ]; then
-        echo "Running ./terraform-selective/build-files/tf-wrapper.sh apply_diff on changed projects ..."
-        ./terraform-selective/build-files/tf-wrapper.sh apply_diff "${BRANCH_NAME}"
+        echo "Running ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_diff on changed projects ..."
+        ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_diff "${BRANCH_NAME}"
       else
         echo "No difference was found in project folders or modules."
       fi

@@ -15,7 +15,7 @@
 timeout: 1200s
 substitutions:
   _TF_SA_EMAIL: '330889758378@cloudbuild.gserviceaccount.com'
-  _PREVIOUS_COMMIT_SHA: '738cd48fe08279035bb01bd0c4f3ea8ad7816ba5'
+  _PREVIOUS_COMMIT_SHA: 'aa58132a33766aa180c1880caa1fcb8e13492a4d'
   _RUN_ALL_PROJECTS: 'false'
 steps:
 - id: 'unshallow'
@@ -36,8 +36,8 @@ steps:
   args: 
   - -c
   - |
-    echo "command: . cloudbuild-selective-deployment/build-files/delta-changes.sh $PROJECT_ID $_DELTA_TRIGGER_NAME $BUILD_ID $COMMIT_SHA $TRIGGER_NAME $_PREVIOUS_COMMIT_SHA"
-    . cloudbuild-selective-deployment/build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
+    echo "command: . /cloudbuild-selective-deployment/build-files/delta-changes.sh $PROJECT_ID $_DELTA_TRIGGER_NAME $BUILD_ID $COMMIT_SHA $TRIGGER_NAME $_PREVIOUS_COMMIT_SHA"
+    . /cloudbuild-selective-deployment/build-files/delta-changes.sh "$PROJECT_ID" "$_DELTA_TRIGGER_NAME" "$BUILD_ID" "$COMMIT_SHA" "$TRIGGER_NAME" "$_PREVIOUS_COMMIT_SHA" || exit 1
 - id: 'setup'
   name: gcr.io/cloud-builders/gcloud
   entrypoint: 'sh'

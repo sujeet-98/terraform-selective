@@ -59,10 +59,10 @@ steps:
   - |
       if [ "$_RUN_ALL_PROJECTS" == "true" ]  ; then
         echo "Running ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_all on all projects ..."
-        ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_all "${BRANCH_NAME}"
+        ./build-files/tf-wrapper.sh apply_all "${BRANCH_NAME}"
       elif [ -s logs/user_resources_folder_diff.log ]; then
         echo "Running ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_diff on changed projects ..."
-        ./cloudbuild-selective-deployment/build-files/tf-wrapper.sh apply_diff "${BRANCH_NAME}"
+        ./build-files/tf-wrapper.sh apply_diff "${BRANCH_NAME}"
       else
         echo "No difference was found in project folders or modules."
       fi

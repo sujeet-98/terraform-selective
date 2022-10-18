@@ -15,7 +15,7 @@
 timeout: 1200s
 substitutions:
   _TF_SA_EMAIL: '330889758378@cloudbuild.gserviceaccount.com'
-  _PREVIOUS_COMMIT_SHA: '9f2b1521889f8ee0a5add3bf6804d879654c796e'
+  _PREVIOUS_COMMIT_SHA: '3224e2b814e3513555bd6019cd65b52c4567b12a'
   _RUN_ALL_PROJECTS: 'false'
 steps:
 - id: 'unshallow'

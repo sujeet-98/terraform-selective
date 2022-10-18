@@ -22,7 +22,7 @@ steps:
   name: gcr.io/cloud-builders/git
   args: ['fetch', '--unshallow']
 - id: 'Making build shell scripts executable'
-  name: asia-south1-docker.pkg.dev/$PROJECT_ID/terraform:latest
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: bash
   args:
   - -c
@@ -31,7 +31,7 @@ steps:
     chmod -R 755 build-files/
 # [START Terraform]
 - id: 'selective deployment'
-  name: asia-south1-docker.pkg.dev/$PROJECT_ID/terraform:latest
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: bash
   args: 
   - -c
@@ -51,7 +51,7 @@ steps:
     fi
 # [START tf-apply]
 - id: 'tf apply'
-  name: asia-south1-docker.pkg.dev/$PROJECT_ID/terraform:latest
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: bash
   args:
   - -c
